@@ -6,18 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/offwhite"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/menu_home"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="145dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/circle_shape"
+            android:text="Whitelist"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="openWhitelistFragment"/>
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="145dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="196dp"
+            android:background="@drawable/circle_shape"
+            android:text="Info"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="openInfoFragment"/>
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="145dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="360dp"
+            android:background="@drawable/circle_shape"
+            android:text="Map"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="openMapFragment"/>
+
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="145dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="524dp"
+            android:background="@drawable/circle_shape"
+            android:text="Bluetooth"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="openBLESettingsFragment"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

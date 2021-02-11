@@ -17,6 +17,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -34,7 +37,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gymarbete">
-        <activity android:name=".GoogleMap"></activity>
+        <activity android:name=".ui.bluetooth.BLESettings"></activity>
+
+        <service
+            android:name=".DirectContactHandler"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".GoogleMap" android:theme="@style/Theme.Gymarbete.NoActionBar"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
