@@ -32,5 +32,4 @@ public class WhiteListFragment extends Fragment {
         });
         return root;
     }
-    
 }

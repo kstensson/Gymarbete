@@ -1,8 +1,7 @@
-package com.example.gymarbete;
+package com.example.gymarbete.ui.map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gymarbete.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,10 +17,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class GMap extends Fragment {
+public class MapsFragment extends Fragment {
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-        
+
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -33,22 +33,17 @@ public class GMap extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LatLng sydney = new LatLng(-34, 151);
-            LatLng test = new LatLng(-30, 140);
-            googleMap.addMarker(new MarkerOptions()
-                    .position(test)
-                    .title("Marker in Sydney"));
+            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         }
     };
-
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_g_map, container, false);
+        return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
     @Override

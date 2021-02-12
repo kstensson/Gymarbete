@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_info" />
     <fragment
         android:id="@+id/nav_map"
-        android:name="com.example.gymarbete.GMap"
+        android:name="com.example.gymarbete.ui.map.MapsFragment"
         android:label="@string/menu_map"
-        tools:layout="@layout/fragment_g_map" />
+        tools:layout="@layout/fragment_maps" />
 </navigation>
