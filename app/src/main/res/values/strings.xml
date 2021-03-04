@@ -40,4 +40,5 @@
     <string name="channel_description">empty</string>
     <string name="channel_name">Corona armband</string>
     <string name="CHANNEL_ID">foregroundservice</string>
+    <string name="connectBtn">Connect</string>
 </resources>

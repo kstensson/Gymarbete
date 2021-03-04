@@ -1,4 +1,4 @@
-package com.example.gymarbete.activities.bluetooth.ui.main;
+package com.example.gymarbete.activities.account.ui.main;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -15,12 +15,12 @@ import android.view.ViewGroup;
 import com.example.gymarbete.R;
 
 
-public class BLESettingsFragment extends Fragment {
+public class AccountFragment extends Fragment {
 
     private MainViewModel mViewModel;
 
-    public static BLESettingsFragment newInstance() {
-        return new BLESettingsFragment();
+    public static AccountFragment newInstance() {
+        return new AccountFragment();
     }
 
     @Nullable
