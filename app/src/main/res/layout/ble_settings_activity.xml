@@ -9,14 +9,26 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/scanningBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="scan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="scan">
-    </Button>
+        app:layout_constraintVertical_bias="0.976"></Button>
+
+    <ListView
+        android:id="@+id/devicesList"
+        android:layout_width="307dp"
+        android:layout_height="627dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

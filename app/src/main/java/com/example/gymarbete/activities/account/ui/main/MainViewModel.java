@@ -1,4 +1,4 @@
-package com.example.gymarbete.activities.bluetooth.ui.main;
+package com.example.gymarbete.activities.account.ui.main;
 
 import androidx.lifecycle.ViewModel;
 

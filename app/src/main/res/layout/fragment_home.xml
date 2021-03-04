@@ -8,19 +8,20 @@
     android:background="@color/offwhite"
     tools:context=".MainActivity">
 
-    <Button
+    <ImageButton
         android:id="@+id/btn"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@drawable/circle_shape"
-        android:onClick="openWhitelistActivity"
+        android:onClick="openBLESettingsActivity"
         android:text="Whitelist"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guide1" />
+        app:layout_constraintTop_toTopOf="@+id/guide1"
+        android:src="@drawable/ic_account"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn2"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -30,9 +31,10 @@
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide2" />
+        app:layout_constraintTop_toTopOf="@id/guide2"
+        android:src="@drawable/ic_uttropstecken"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn3"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -42,15 +44,16 @@
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide3" />
+        app:layout_constraintTop_toTopOf="@id/guide3"
+        android:src="@drawable/ic_karta1" />
 
     <Button
         android:id="@+id/btn4"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@drawable/circle_shape"
-        android:onClick="openBLESettingsActivity"
-        android:text="Bluetooth"
+        android:onClick="openWhitelistActivity"
+        android:text="Whitelist"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
