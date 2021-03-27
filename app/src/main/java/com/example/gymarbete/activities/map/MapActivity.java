@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.gymarbete.R;
-import com.example.gymarbete.activities.map.ui.main.MapFragment;
 
 public class MapActivity extends AppCompatActivity {
 

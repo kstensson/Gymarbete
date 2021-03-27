@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guide3"
-        android:src="@drawable/ic_karta1" />
+        android:src="@drawable/ic_karta" />
 
     <Button
         android:id="@+id/btn4"

@@ -17,24 +17,20 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
-import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.gymarbete.BleGpsService;
+import com.example.gymarbete._Service;
 import com.example.gymarbete.R;
 
 
 public class AccountActivity extends AppCompatActivity {
     public static final int REQUEST_ENABLE_BLUETOOTH = 11;
     private static final int REQUEST_ENABLE_COARSE_LOCATION = 1;
-    BleGpsService mService;
+    _Service mService;
     boolean mBound = false;
     private ListView devicesList;
     private BluetoothAdapter bluetoothAdapter;
@@ -64,7 +60,7 @@ public class AccountActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
             // We've bound to LocalService, cast the IBinder and get LocalService instance
-            BleGpsService.LocalBinder binder = (BleGpsService.LocalBinder) service;
+            _Service.LocalBinder binder = (_Service.LocalBinder) service;
             mService = binder.getService();
             mBound = true;
         }
@@ -81,7 +77,7 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.ble_settings_activity);
 
         Context mContext = getApplicationContext();
-        Intent intent = new Intent(mContext, BleGpsService.class);
+        Intent intent = new Intent(mContext, _Service.class);
         mContext.bindService(intent,connection, Context.BIND_AUTO_CREATE);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -111,7 +107,7 @@ public class AccountActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this, BleGpsService.class);
+        Intent intent = new Intent(this, _Service.class);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
 

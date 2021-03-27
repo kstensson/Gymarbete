@@ -1,0 +1,104 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "d6f82c0fe7a29d14dce6a6bdaae9df57",
+    "entities": [
+      {
+        "tableName": "WhitelistID",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `whitelist` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wid",
+            "columnName": "whitelist",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "WhitelistEnabled",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER NOT NULL, `enable_whitelist` INTEGER, PRIMARY KEY(`uid`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "enable",
+            "columnName": "enable_whitelist",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Tracker",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER NOT NULL, `datetime` TEXT, `longt` REAL, `lat` REAL, PRIMARY KEY(`uid`))",
+        "fields": [
+          {
+            "fieldPath": "uid",
+            "columnName": "uid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dateTime",
+            "columnName": "datetime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longt",
+            "columnName": "longt",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "uid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd6f82c0fe7a29d14dce6a6bdaae9df57')"
+    ]
+  }
+}

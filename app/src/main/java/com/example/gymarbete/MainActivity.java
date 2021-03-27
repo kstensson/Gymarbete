@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setNavigationBarColor(getResources().getColor(R.color.offwhite));
         bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = bluetoothManager.getAdapter();
-        Intent intent = new Intent(MainActivity.this, BleGpsService.class);
+        Intent intent = new Intent(MainActivity.this, _Service.class);
         startService(intent);
         setContentView(R.layout.fragment_home);
     }

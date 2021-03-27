@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gymarbete.database.entities.Tracker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,7 +18,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class GMap extends Fragment {
+
+    // Inte säker på om denna classen någonsin används då skaparen har varit väldigt otydlig men
+    // den bör göra exakt vad vi önskar och spara information i databasen mellan sessioner
+    public static ArrayList<Tracker> trackers = new ArrayList<>();
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         
@@ -38,10 +45,13 @@ public class GMap extends Fragment {
                     .position(test)
                     .title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            // Kevin: jag har ingen aning om detta funkar då min bank inte låter mig registrera för google maps och det var Oscar som gjorde det mesta annat med kartan
+            for (Tracker tracker : trackers) {
+                googleMap.addMarker(new MarkerOptions().position(tracker.getLatLng()).title(tracker.dateTime));
+            }
         }
     };
-
-
 
     @Nullable
     @Override

@@ -25,6 +25,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.room.Room;
 
+import com.example.gymarbete.database.AppDatabase;
+import com.example.gymarbete.database.dao.WhitelistDao;
+import com.example.gymarbete.database.entities.WhitelistID;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -33,20 +36,9 @@ import java.util.UUID;
 
 import no.nordicsemi.android.ble.BleManager;
 
-public class BleGpsService extends Service {
-    public final static String ACTION_GATT_CONNECTED =
-            "com.example.bluetooth.le.ACTION_GATT_CONNECTED";
-    public final static String ACTION_GATT_DISCONNECTED =
-            "com.example.bluetooth.le.ACTION_GATT_DISCONNECTED";
-    public final static String ACTION_GATT_SERVICES_DISCOVERED =
-            "com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED";
-    public final static String ACTION_DATA_AVAILABLE =
-            "com.example.bluetooth.le.ACTION_DATA_AVAILABLE";
-    public final static String EXTRA_DATA =
-            "com.example.bluetooth.le.EXTRA_DATA";
-    public final static UUID UUID_HEART_RATE_MEASUREMENT =
-            UUID.fromString("19B10001-E8F2-537E-4F6C-D104768A1214");
-    private final static String TAG = BleGpsService.class.getSimpleName();
+public class _Service extends Service {
+
+    private final static String TAG = _Service.class.getSimpleName();
     private static final int STATE_DISCONNECTED = 0;
     private static final int STATE_CONNECTING = 1;
     private static final int STATE_CONNECTED = 2;
@@ -63,8 +55,8 @@ public class BleGpsService extends Service {
     private int connectionState = STATE_DISCONNECTED;
 
     // W for whitelist
-    public Database.AppDatabase wDb;
-    public Database.WhitelistDao wDao;
+    public AppDatabase db;
+    public WhitelistDao wDao;
 
     public final BluetoothGattCallback gattCallback =
             new BluetoothGattCallback() {
@@ -128,14 +120,13 @@ public class BleGpsService extends Service {
                 5000
         );
 
-        wDb = Room.databaseBuilder(getApplicationContext(), Database.AppDatabase.class, "db1").build();
-        wDao = wDb.whitelistDao();
-
+        db = Room.databaseBuilder(getBaseContext(), AppDatabase.class, "db1").build();
+        wDao = db.whitelistDao();
 
         Random random = new Random();
         notid = random.nextInt(9999);
 
-        Intent notificationIntent = new Intent(this, BleGpsService.class);
+        Intent notificationIntent = new Intent(this, _Service.class);
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
@@ -162,7 +153,7 @@ public class BleGpsService extends Service {
     }
 
     public void testDao(int id ) {
-        wDao.insert(new Database.WhitelistId(id));
+        wDao.insert(new WhitelistID(id));
     }
 
     public void getLatLongt() {
@@ -182,36 +173,10 @@ public class BleGpsService extends Service {
                                 Log.i("", "Gps failed");
                             }
                         });
-            } /*else {
-                ActivityCompat.requestPermissions(,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-            }*/
+            }
         }
     }
 
-    /*private void broadcastUpdate(final String action) {
-        final Intent intent = new Intent(action);
-        sendBroadcast(intent);
-    }
-    private void broadcastUpdate(final String action,
-                                 final BluetoothGattCharacteristic characteristic) {
-        final Intent intent = new Intent(action);
-
-        // This is special handling for the Heart Rate Measurement profile. Data
-        // parsing is carried out as per profile specifications.
-        if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
-            int flag = characteristic.getProperties();
-            final String heartRate = characteristic.getStringValue(1);
-            Log.d(TAG, String.format("Data %d", heartRate));
-            intent.putExtra(EXTRA_DATA, String.valueOf(heartRate));
-        } else if(UUID_) {
-
-        } else {
-
-        }
-        sendBroadcast(intent);
-    }*/
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
@@ -231,9 +196,9 @@ public class BleGpsService extends Service {
     }
 
     public class LocalBinder extends Binder {
-        public BleGpsService getService() {
+        public _Service getService() {
             // Return this instance of LocalService so clients can call public methods
-            return BleGpsService.this;
+            return _Service.this;
         }
     }
 

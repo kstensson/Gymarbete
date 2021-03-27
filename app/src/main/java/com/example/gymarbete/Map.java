@@ -18,6 +18,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Map extends FragmentActivity implements OnMapReadyCallback {
 
+    // TODO: är det MapActivity, GMap, eller Map som faktiskt gör något?
+
     private GoogleMap mMap;
 
     @Override
