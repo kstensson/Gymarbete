@@ -5,7 +5,8 @@
     android:id="@+id/whitelist"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.whitelist.WhitelistActivity">
+    tools:context=".activities.whitelist.WhitelistActivity"
+    android:background="@color/offwhite">
 
     <Switch
         android:id="@+id/switchwhitelist"
@@ -18,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textOn="enableWitelist"
-        android:textOff="disableWhitelist"/>
+        android:textOff="disableWhitelist"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
         android:id="@+id/textView"
@@ -40,7 +42,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/stroke_bg"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="15dp"
         tools:layout_editor_absoluteY="143dp"
@@ -49,7 +51,7 @@
 
 
         <LinearLayout
-            android:id="@+id/whitelistList"
+            android:id="@+id/whitelist_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -61,6 +63,10 @@
                 android:textColor="@color/black"
                 android:onClick="addWhitelistID"
                 android:text="Add new..."/>
+            <ListView
+                android:id="@+id/whitelist_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </ScrollView>
 

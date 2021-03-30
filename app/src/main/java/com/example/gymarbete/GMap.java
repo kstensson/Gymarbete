@@ -26,7 +26,7 @@ public class GMap extends Fragment {
     // den bör göra exakt vad vi önskar och spara information i databasen mellan sessioner
     public static ArrayList<Tracker> trackers = new ArrayList<>();
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         
         /**
          * Manipulates the map once available.

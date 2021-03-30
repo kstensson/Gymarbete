@@ -4,7 +4,9 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
+import com.example.gymarbete.database.entities.WhitelistEnabled;
 import com.example.gymarbete.database.entities.WhitelistID;
 
 import java.util.List;
@@ -15,11 +17,20 @@ public interface WhitelistDao {
     List<WhitelistID> getAll();
 
     @Insert
-    void insertAll(WhitelistID... whitelistIds);
+    void insertAll(WhitelistID... whitelistIDs);
 
     @Insert
-    void insert(WhitelistID whitelistId);
+    void insert(WhitelistID whitelistID);
 
     @Delete
     void delete(WhitelistID wid);
+
+    @Insert
+    void insert(WhitelistEnabled whitelistEnabled);
+
+    @Query("SELECT * FROM whitelistenabled WHERE uid=0")
+    WhitelistEnabled getEnabled();
+
+    @Update
+    void update(WhitelistEnabled whitelistEnabled);
 }

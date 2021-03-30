@@ -41,4 +41,5 @@
     <string name="channel_name">Corona armband</string>
     <string name="CHANNEL_ID">foregroundservice</string>
     <string name="connectBtn">Connect</string>
+    <string name="your_bracelet_id">Ditt armbands ID är: 5f011532-6981-495a-b012-803f973789b6</string>
 </resources>

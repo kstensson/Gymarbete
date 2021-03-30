@@ -15,5 +15,6 @@ public class WhitelistEnabled {
 
     public WhitelistEnabled(Boolean enable) {
         this.enable = enable;
+        this.uid = 0;
     }
 }

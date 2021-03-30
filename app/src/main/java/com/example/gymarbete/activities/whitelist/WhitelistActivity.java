@@ -3,7 +3,9 @@ package com.example.gymarbete.activities.whitelist;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,10 +13,14 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.Layout;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,19 +34,21 @@ import java.util.ArrayList;
 
 public class WhitelistActivity extends AppCompatActivity {
 
-    public static ArrayList<WhitelistID> whitelistIDs = new ArrayList<>();
+    public static WhitelistAdapter whitelistIDs;
     _Service mService;
     boolean mBound = false;
-    private Switch sw;
-    private ServiceConnection connection = new ServiceConnection() {
+    boolean firstcreation = true;
+
+    private final ServiceConnection connection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
-            // We've bound to LocalService, cast the IBinder and get LocalService instance
             _Service.LocalBinder binder = (_Service.LocalBinder) service;
             mService = binder.getService();
             mBound = true;
+            whitelistIDs.addAll(mService.whitelistIDS);
+            firstcreation = false;
         }
 
         @Override
@@ -54,11 +62,19 @@ public class WhitelistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.whitelist_activity);
 
-        whitelistIDs.addAll(mService.db.whitelistDao().getAll());
-
         Context mContext = getApplicationContext();
+
+        whitelistIDs = new WhitelistAdapter(this, R.layout.whitelistitem);
+
         Intent intent = new Intent(mContext, _Service.class);
         mContext.bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
+        /* Gjort under stress. Är väl medveten om snyggare metoder
+         Något med asykroniteten i åtkomsten till databasen gör listan ofta tom
+         med mer tid hade jag implementerat att den skickar en signal när åtkomsten
+         är färdig istället för att brute-forcea det såhär */
+        if (!firstcreation)
+            whitelistIDs.addAll(mService.whitelistIDS);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -70,24 +86,19 @@ public class WhitelistActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        sw = findViewById(R.id.switchwhitelist);
-        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    findViewById(R.id.whitelistScrollView).setVisibility(View.VISIBLE);
-                } else {
-                    findViewById(R.id.whitelistScrollView).setVisibility(View.INVISIBLE);
-                }
+
+        @SuppressLint("UseSwitchCompatOrMaterialCode")
+        Switch sw = findViewById(R.id.switchwhitelist);
+        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                findViewById(R.id.whitelistScrollView).setVisibility(View.VISIBLE);
+            } else {
+                findViewById(R.id.whitelistScrollView).setVisibility(View.INVISIBLE);
             }
         });
 
-        LinearLayout listView = (LinearLayout) findViewById(R.id.whitelistList);
-        whitelistIDs.forEach((entry) -> {
-            TextView textView = new TextView(this);
-            textView.setText(entry.wid);
-            listView.addView(textView);
-        });
+        ListView listView = findViewById(R.id.whitelist_listview);
+        listView.setAdapter(whitelistIDs);
     }
 
     @Override
@@ -104,30 +115,44 @@ public class WhitelistActivity extends AppCompatActivity {
         alert.setCancelable(true);
         alert.setTitle("Add whitelist ID");
         alert.setMessage("Enter the ID from the other users info page");
-        final EditText inputText = new EditText(this);
-        alert.setView(inputText);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View inputDialog = inflater.inflate(R.layout.whitelistdialog, null);
+
+        alert.setView(inputDialog);
         // TODO: add option for name
         alert.setPositiveButton("Add", (dialog, which) -> {
-            String input = inputText.getText().toString();
 
-            entry.setText(input);
+            EditText idInput = inputDialog.findViewById(R.id.id_input);
+            String id = idInput.getText().toString();
+            EditText nameInput = inputDialog.findViewById(R.id.name_input);
+            String name = nameInput.getText().toString();
+
             int value;
             try {
-                value = Integer.parseInt(input);
+                value = Integer.parseInt(id);
             } catch (NumberFormatException e) {
                 Toast.makeText(getApplicationContext(), "No chracters can be entered as ID", Toast.LENGTH_SHORT).show();
                 return;
             }
-            whitelistIDs.add(new WhitelistID(value));
+            WhitelistID whitelistID = new WhitelistID(value, name);
+            whitelistIDs.add(whitelistID);
 
-            mService.whitelistGattCurrId.setValue(value, BluetoothGattCharacteristic.FORMAT_SINT32, 0);
-            mService.bluetoothGatt.writeCharacteristic(mService.whitelistGattCurrId);
-            LinearLayout listView = (LinearLayout) findViewById(R.id.whitelistList);
+            if (mService.isConnectedBLE()) {
+                mService.whitelistGattCurrId.setValue(value, BluetoothGattCharacteristic.FORMAT_SINT32, 0);
+                mService.bluetoothGatt.writeCharacteristic(mService.whitelistGattCurrId);
+            }
+            /*LinearLayout listView = findViewById(R.id.whitelist_list);
             listView.addView(entry);
 
-            WhitelistID whitelistId = new WhitelistID(value);
-            mService.wDao.insert(whitelistId);
+            WhitelistID whitelistId = new WhitelistID(value);*/
+            new Thread(() -> mService.wDao.insert(whitelistID)).start();
+
         });
         alert.show();
+    }
+
+    public float dpToPixel(float dp) {
+        return dp * ((float) getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 }

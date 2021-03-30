@@ -16,7 +16,7 @@ import com.example.gymarbete.activities.map.MapActivity;
 import com.example.gymarbete.activities.whitelist.WhitelistActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private int REQUEST_ENABLE_BT = 0;
+    private final int REQUEST_ENABLE_BT = 0;
 
     private BluetoothManager bluetoothManager;
     private BluetoothAdapter bluetoothAdapter;

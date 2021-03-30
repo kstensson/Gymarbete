@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.gymarbete.R;
 
 public class DeviceAdapter extends ArrayAdapter<BluetoothDevice> {
-    private AccountActivity mContext;
+    private final AccountActivity mContext;
     public DeviceAdapter(@NonNull Context context, int resource) {
         super(context, resource);
         mContext = (AccountActivity) context;
@@ -32,8 +32,8 @@ public class DeviceAdapter extends ArrayAdapter<BluetoothDevice> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.device_item, parent, false);
         }
 
-        TextView name = (TextView) convertView.findViewById(R.id.name);
-        TextView uuid = (TextView) convertView.findViewById(R.id.uuid);
+        TextView name = convertView.findViewById(R.id.name);
+        TextView uuid = convertView.findViewById(R.id.uuid);
 
         Button button = convertView.findViewById(R.id.connectBtn);
         button.setOnClickListener(v -> {
@@ -45,6 +45,4 @@ public class DeviceAdapter extends ArrayAdapter<BluetoothDevice> {
 
         return convertView;
     }
-
-
 }

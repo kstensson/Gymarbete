@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 public class MapViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private final MutableLiveData<String> mText;
 
     public MapViewModel() {
         mText = new MutableLiveData<>();

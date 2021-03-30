@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="@id/guide3"
         android:src="@drawable/ic_karta" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn4"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -57,7 +57,9 @@
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide4" />
+        app:layout_constraintTop_toTopOf="@id/guide4"
+        android:src="@drawable/ic_list"
+        />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide1"

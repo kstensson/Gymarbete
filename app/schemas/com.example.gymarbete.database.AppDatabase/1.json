@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d6f82c0fe7a29d14dce6a6bdaae9df57",
+    "identityHash": "42b5c39e07069508560f31b8c9eb8509",
     "entities": [
       {
         "tableName": "WhitelistID",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `whitelist` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `whitelist` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -25,7 +25,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -58,7 +58,7 @@
       },
       {
         "tableName": "Tracker",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER NOT NULL, `datetime` TEXT, `longt` REAL, `lat` REAL, PRIMARY KEY(`uid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `datetime` TEXT, `longt` REAL, `lat` REAL)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -89,7 +89,7 @@
           "columnNames": [
             "uid"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -98,7 +98,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd6f82c0fe7a29d14dce6a6bdaae9df57')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '42b5c39e07069508560f31b8c9eb8509')"
     ]
   }
 }

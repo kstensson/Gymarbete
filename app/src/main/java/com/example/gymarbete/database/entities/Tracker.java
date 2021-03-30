@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Tracker {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int uid;
 
     @ColumnInfo(name = "datetime")

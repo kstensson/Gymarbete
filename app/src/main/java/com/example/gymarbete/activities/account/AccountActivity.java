@@ -30,13 +30,17 @@ import com.example.gymarbete.R;
 public class AccountActivity extends AppCompatActivity {
     public static final int REQUEST_ENABLE_BLUETOOTH = 11;
     private static final int REQUEST_ENABLE_COARSE_LOCATION = 1;
+
     _Service mService;
     boolean mBound = false;
+
     private ListView devicesList;
+
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothManager bluetoothManager;
     private Button scanningBtn;
     private DeviceAdapter listAdapter;
+
     private final BroadcastReceiver devicesFoundReciever = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -54,7 +58,7 @@ public class AccountActivity extends AppCompatActivity {
             }
         }
     };
-    private ServiceConnection connection = new ServiceConnection() {
+    private final ServiceConnection connection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName className,
@@ -74,11 +78,11 @@ public class AccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ble_settings_activity);
+        setContentView(R.layout.account_activity);
 
         Context mContext = getApplicationContext();
         Intent intent = new Intent(mContext, _Service.class);
-        mContext.bindService(intent,connection, Context.BIND_AUTO_CREATE);
+        mContext.bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         devicesList = findViewById(R.id.devicesList);
@@ -119,7 +123,7 @@ public class AccountActivity extends AppCompatActivity {
 
     private boolean checkCoarseLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_COARSE_LOCATION},
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     REQUEST_ENABLE_COARSE_LOCATION);
             return false;
         } else {
@@ -129,7 +133,7 @@ public class AccountActivity extends AppCompatActivity {
 
     private void checkBluetoothState() {
         if (bluetoothAdapter == null) {
-            Toast.makeText(this,"BLE not supported", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "BLE not supported", Toast.LENGTH_SHORT).show();
         } else {
             if (bluetoothAdapter.isEnabled()) {
                 if (bluetoothAdapter.isDiscovering()) {
@@ -160,7 +164,7 @@ public class AccountActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         switch (requestCode) {
-            case REQUEST_ENABLE_COARSE_LOCATION :
+            case REQUEST_ENABLE_COARSE_LOCATION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Coarse location allowed, bluetooth scanning should work", Toast.LENGTH_SHORT).show();
                 } else {
@@ -171,6 +175,6 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     public void connectToDevice(BluetoothDevice device) {
-        device.connectGatt(this,true, mService.gattCallback);
+        device.connectGatt(this, true, mService.gattCallback);
     }
 }

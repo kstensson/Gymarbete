@@ -31,6 +31,7 @@ import com.example.gymarbete.database.entities.WhitelistID;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class _Service extends Service {
     private static final int STATE_CONNECTED = 2;
     private final IBinder binder = new LocalBinder();
     private int notid;
-    private int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
+    private final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
     private BluetoothManager bluetoothManager;
     private BluetoothAdapter bluetoothAdapter;
     private String bluetoothDeviceAddress;
@@ -53,6 +54,11 @@ public class _Service extends Service {
     public BluetoothGattCharacteristic whitelistGattCurrId;
     public BluetoothGattCharacteristic whitelistGattNext;
     private int connectionState = STATE_DISCONNECTED;
+
+    public ArrayList<WhitelistID> whitelistIDS = new ArrayList<>();
+
+    public boolean connectedBLE = false;
+
 
     // W for whitelist
     public AppDatabase db;
@@ -72,6 +78,7 @@ public class _Service extends Service {
                         Log.i(TAG, "Connected to GATT server.");
                         Log.i(TAG, "Attempting to start service discovery:" +
                                 bluetoothGatt.discoverServices());
+                        connectedBLE = true;
 
                     } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                         // intentAction = ACTION_GATT_DISCONNECTED;
@@ -122,6 +129,8 @@ public class _Service extends Service {
 
         db = Room.databaseBuilder(getBaseContext(), AppDatabase.class, "db1").build();
         wDao = db.whitelistDao();
+
+        new Thread(() -> whitelistIDS.addAll(wDao.getAll()));
 
         Random random = new Random();
         notid = random.nextInt(9999);
@@ -202,5 +211,7 @@ public class _Service extends Service {
         }
     }
 
-
+    public boolean isConnectedBLE() {
+        return connectedBLE;
+    }
 }

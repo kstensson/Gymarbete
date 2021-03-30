@@ -26,7 +26,7 @@ public class MapFragment extends Fragment {
 
     private MapViewModel mapViewModel;
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
          * Manipulates the map once available.
