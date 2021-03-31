@@ -87,16 +87,6 @@ public class WhitelistActivity extends AppCompatActivity {
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch sw = findViewById(R.id.switchwhitelist);
-        sw.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                findViewById(R.id.whitelistScrollView).setVisibility(View.VISIBLE);
-            } else {
-                findViewById(R.id.whitelistScrollView).setVisibility(View.INVISIBLE);
-            }
-        });
-
         ListView listView = findViewById(R.id.whitelist_listview);
         listView.setAdapter(whitelistIDs);
     }

@@ -17,7 +17,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/scanningBtn"
@@ -29,9 +30,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.976"
+        android:text="Scan"/>
 
     <ListView
+        android:background="@color/white"
         android:id="@+id/devicesList"
         android:layout_width="300dp"
         android:layout_height="568dp"

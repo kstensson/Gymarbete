@@ -14,25 +14,12 @@
         android:layout_height="100dp"
         android:background="@drawable/circle_shape"
         android:onClick="openBLESettingsActivity"
+        android:src="@drawable/ic_account"
         android:text="Whitelist"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guide1"
-        android:src="@drawable/ic_account"/>
-
-    <ImageButton
-        android:id="@+id/btn2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/circle_shape"
-        android:onClick="openInfoActivity"
-        android:text="Info"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide2"
-        android:src="@drawable/ic_uttropstecken"/>
+        app:layout_constraintTop_toTopOf="@+id/guide1" />
 
     <ImageButton
         android:id="@+id/btn3"
@@ -40,12 +27,25 @@
         android:layout_height="100dp"
         android:background="@drawable/circle_shape"
         android:onClick="openMapActivity"
+        android:src="@drawable/ic_karta"
         android:text="Map"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide3"
-        android:src="@drawable/ic_karta" />
+        app:layout_constraintTop_toTopOf="@id/guide3" />
+
+    <ImageButton
+        android:id="@+id/btn2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/circle_shape"
+        android:onClick="openInfoActivity"
+        android:src="@drawable/ic_uttropstecken"
+        android:text="Info"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guide4" />
 
     <ImageButton
         android:id="@+id/btn4"
@@ -53,13 +53,12 @@
         android:layout_height="100dp"
         android:background="@drawable/circle_shape"
         android:onClick="openWhitelistActivity"
+        android:src="@drawable/ic_list"
         android:text="Whitelist"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide4"
-        android:src="@drawable/ic_list"
-        />
+        app:layout_constraintTop_toTopOf="@id/guide2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide1"
@@ -88,4 +87,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#798B99"
+        android:paddingTop="10dp"
+        android:paddingBottom="32dp"
+        android:text="Covid-19 armband"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="26dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
